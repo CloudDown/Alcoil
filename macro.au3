@@ -1,5 +1,4 @@
 #include <Misc.au3>
-
 $file = FileOpen("mousemoove.txt", 0)
 If $file = -1 Then
     ConsoleWrite("Erreur : Impossible d'ouvrir le fichier.")
@@ -18,7 +17,7 @@ Global $instructions = StringSplit($fileContent, ",")
 Global $confirm = 0
 Global $power = 30
 Global $fast = 15
-;Global $infiniw = $instructions[UBound($instructions) - 1][0] = "W"
+$place = MouseGetPos()
 
 Func SmoothMouseMove($xDest, $yDest, $speed=$fast)
     If $speed  = -1 Then
@@ -58,7 +57,6 @@ While 1
         If _IsPressed("77") Then ; F8
             Exit
         EndIf
-
 
         For $i = 0 To UBound($instructions) - 1
             $pos = MouseGetPos()
@@ -100,41 +98,20 @@ While 1
                     EndIf
                 Case $instructions[$i] = "W1"
                     If _IsPressed("01") Then
-                        If $i = UBound($instructions) - 1 Then
-                            while _IsPressed("01")
-                                Sleep(1000)
-                            wend
-                        Else
                             Sleep(1000)
-                        EndIf
                     EndIf
                 Case $instructions[$i] = "W2"
                     If _IsPressed("01") Then
-                        If $i = UBound($instructions) - 1 Then
-                            while _IsPressed("01")
-                                Sleep(500)
-                            wend
-                        Else
                             Sleep(500)
-                        EndIf
                     EndIf
                 Case $instructions[$i] = "W3"
                     If _IsPressed("01") Then
-                        If $i = UBound($instructions) - 1 Then
-                            while _IsPressed("01")
-                                Sleep(250)
-                            wend
-                        Else
-                            Sleep(250)
-                        EndIf
-                    EndIf
-                Case Else
-                    If _IsPressed("01") Then
-                        Sleep($instructions[$i])
+                        Sleep(250)
                     EndIf
             EndSelect
         Next
         Sleep(10)
     WEnd
+
 WEnd
 

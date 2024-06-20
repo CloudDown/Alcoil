@@ -1,5 +1,5 @@
 
-print("\033[1;33m"r'''
+print("\033[0;33m"r'''
    _                                                     
 ,-'  `-._                                          
 |=========|                                          
@@ -13,11 +13,24 @@ print("\033[1;33m"r'''
 ''')
 
 print('\033[0m'+"ㅤF4 :"+'\033[0;32m'+"ㅤ[On"+'\033[0m'+" / "+'\033[0;31m'+"Off]","\n")
-print('\033[0m'+"ㅤF8 :"+'\033[0;31m'+"ㅤClose","\n")
+print('\033[0m'+"ㅤF8 :"+'\033[0;31m'+"ㅤClose","\n"+'\033[7;37m')
 
 from PIL import Image
+import os
 
-image = Image.open('shoot.png')
+
+ls = os.listdir(os.getcwd()+r"\weapon")
+for i in range (len(ls)):
+   if i%5 == 0:
+      print("\n")
+   print('['+str(i+1)+']',ls[i][:-4],end=" ")
+print("\n"+"\n"+'\033[0m')
+fichier = int(input("Choose the no-recoil weapon file : "))
+print("")
+inf=input("Occurences last actions : ")
+
+
+image = Image.open(os.getcwd()+r"\weapon\\"+ls[fichier-1])
 image = image.convert('RGB')
 long, hauteur = image.size
 liste_coo=[]
@@ -70,13 +83,12 @@ for i in range(len(liste_coo)-1):
 liste_moov=liste_moov[1:]
 
 
+
 with open('mousemoove.txt', 'w') as file:
-      i=0
-      while i<=len(liste_moov)-1:
-         file.write(liste_moov[i])
-         i+=1
-         if i!=len(liste_moov):
-            file.write(",")
+      for elt in liste_moov:
+         file.write(elt)
+         file.write(",")
+      file.write(inf)
 
 
 
