@@ -1,2 +1,2 @@
 py scan.py
-macro.au3
+macro.exe
