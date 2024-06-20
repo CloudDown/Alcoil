@@ -16,14 +16,14 @@ print("\033[1;33m",'''
 
 from PIL import Image
 
-image = Image.open('shoot.jpg')
+image = Image.open('shoot.png')
 image = image.convert('RGB')
 long, hauteur = image.size
 liste_coo=[]
 for y in range(hauteur):
    for x in range(long):
       r,g,b=image.getpixel((x, hauteur-y-1))
-      if r <= 10 and g <=10 and b <= 10:
+      if r <=235 and g <=235 and b <= 235:
          liste_coo.append((x,hauteur-y-1))
 
 liste_moov=[""]
@@ -31,10 +31,20 @@ sujet=liste_coo[0]
 for i in range(len(liste_coo)-1):
    x=sujet[0]
    y=sujet[1]
-   if (x,y-1) in liste_coo and liste_moov[-1]!="D":
+   r,g,b=image.getpixel((x, y))
+   if r >=100:
+      liste_moov.append("W1")
+      sujet=(x,y-1)
+   elif g >=100:
+      liste_moov.append("W2")
+      sujet=(x,y-1)
+   elif b >=100:
+      liste_moov.append("W3")
+      sujet=(x,y-1)
+   elif (x,y-1) in liste_coo and liste_moov[-1]!="D":
       liste_moov.append("U")
       sujet=(x,y-1)
-   elif (x,y+1) in liste_coo and liste_moov[-1]!="U":
+   elif (x,y+1) in liste_coo and liste_moov[-1]!="U" and liste_moov[-1][0]!="W":
       liste_moov.append("D")
       sujet=(x-1,y-1)
    elif (x-1,y) in liste_coo and liste_moov[-1]!="R":
