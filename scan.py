@@ -23,11 +23,11 @@ ls = os.listdir(os.getcwd()+r"\weapon")
 for i in range (len(ls)):
    if i%5 == 0:
       print("\n")
-   print('['+str(i+1)+']',ls[i][:-4],end=" ")
+   print('['+str(i+1)+']',ls[i][:-7],end=" ")
 print("\n"+"\n"+'\033[0m')
 fichier = int(input("Choose the no-recoil weapon file : "))
 print("")
-inf=input("Occurences last actions : ")
+inf=ls[fichier-1][-6]
 
 
 image = Image.open(os.getcwd()+r"\weapon\\"+ls[fichier-1])
@@ -85,10 +85,12 @@ liste_moov=liste_moov[1:]
 
 
 with open('mousemoove.txt', 'w') as file:
+      file.write(inf)
+      file.write(",")
       for elt in liste_moov:
          file.write(elt)
          file.write(",")
-      file.write(inf)
+      
 
 
 
