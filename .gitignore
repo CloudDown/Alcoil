@@ -6,3 +6,5 @@ venv/
 *.log
 Thumbs.db
 desktop.ini
+*.au3.bak
+*~
