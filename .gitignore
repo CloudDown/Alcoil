@@ -8,3 +8,6 @@ Thumbs.db
 desktop.ini
 *.au3.bak
 *~
+.idea/
+.vscode/
+*.iml
